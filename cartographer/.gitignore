@@ -1,0 +1,11 @@
+cartographer/Debug/*
+cartographer/bin
+*.exe
+*.pdb
+bin
+debug
+obj
+*.zip
+_ReSharper*
+*.suo
+*.ncb

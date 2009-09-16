@@ -1,0 +1,33 @@
+﻿﻿<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+  <Document>
+<Style id="Labor">
+<LabelStyle>
+<color>ffbbbbff</color>
+<scale>1.5</scale>
+</LabelStyle>
+<LineStyle>
+<color>ffff0e36</color>
+<width>4</width>
+</LineStyle>
+<PolyStyle>
+<color>a8ff7566</color>
+</PolyStyle>
+</Style>
+<Style id="Liberal">
+<LabelStyle>
+        <color>7fffaaff</color>
+        <scale>1.5</scale>
+</LabelStyle>
+        <LineStyle>
+            <color>c54848ff</color>
+            <width>4</width>
+        </LineStyle>
+      <PolyStyle>
+        <color>c54848ff</color>
+<colorMode>normal</colorMode>
+<fill>1</fill>
+<outline>1</outline>
+      </PolyStyle>
+    </Style>
+ 

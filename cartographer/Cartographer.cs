@@ -261,9 +261,8 @@ namespace cartographer
 
             Exporter _exporter = new Exporter(_electorates);
             _exporter.convertToKml();
-
-
             string _textFile = "data/kml.kml";
+            MessageBox.Show("Saved KML File " + _textFile);
             ge.OpenKmlFile(_textFile, 1);
 
         }

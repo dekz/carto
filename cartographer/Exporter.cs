@@ -20,6 +20,8 @@ namespace cartographer
 
             string _kml = "";
             StreamReader tr = new StreamReader("data/KmlTemplate.txt");
+            FileStream fs = new FileStream("data/kml.kml", FileMode.Create);
+            fs.Close();
             StreamWriter tw = new StreamWriter("data/kml.kml");
 
             // Write the KML template styles.

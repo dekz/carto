@@ -80,7 +80,7 @@ namespace cartographer
             }
             catch
             {
-                Environment.Exit(0); //HAAHAHAHAHAHAHA
+                //Environment.Exit(0); //HAAHAHAHAHAHAHA
             }
             while (!m_ElectorateReaderMID.EndOfStream)
             {

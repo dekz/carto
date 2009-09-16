@@ -150,9 +150,12 @@ namespace cartographer
         private void convertData_Click(object sender, EventArgs e)
         {
             ElectorateImporter g_elecImporter = new ElectorateImporter();
-            g_elecImporter.ParseXLS(_xlsData);
-            g_elecImporter.ParseMID(_midData);
-            g_elecImporter.ParseMIF(_mifData);
+            try { g_elecImporter.ParseXLS(_xlsData); }
+            catch { }
+            try { g_elecImporter.ParseMID(_midData); }
+            catch { }
+            try { g_elecImporter.ParseMIF(_mifData); }
+            catch { }
             m_Electorates = g_elecImporter.MergeData();
             Exporter m_exporter = new Exporter(m_Electorates);
             m_exporter.convertToKml();

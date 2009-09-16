@@ -41,6 +41,8 @@
             this.midPB = new System.Windows.Forms.PictureBox();
             this.xlsPB = new System.Windows.Forms.PictureBox();
             this.convertPB = new System.Windows.Forms.PictureBox();
+            this.pointBox = new System.Windows.Forms.CheckedListBox();
+            this.generateBut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mifPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xlsPB)).BeginInit();
@@ -49,17 +51,17 @@
             // 
             // loadKML
             // 
-            this.loadKML.Location = new System.Drawing.Point(813, 228);
+            this.loadKML.Location = new System.Drawing.Point(813, 460);
             this.loadKML.Name = "loadKML";
             this.loadKML.Size = new System.Drawing.Size(168, 23);
             this.loadKML.TabIndex = 0;
-            this.loadKML.Text = "Load KML";
+            this.loadKML.Text = "Load KML File";
             this.loadKML.UseVisualStyleBackColor = true;
             this.loadKML.Click += new System.EventHandler(this.loadKML_Click);
             // 
             // convertData
             // 
-            this.convertData.Location = new System.Drawing.Point(864, 185);
+            this.convertData.Location = new System.Drawing.Point(864, 78);
             this.convertData.Name = "convertData";
             this.convertData.Size = new System.Drawing.Size(117, 23);
             this.convertData.TabIndex = 2;
@@ -69,7 +71,7 @@
             // 
             // exit
             // 
-            this.exit.Location = new System.Drawing.Point(812, 451);
+            this.exit.Location = new System.Drawing.Point(814, 489);
             this.exit.Name = "exit";
             this.exit.Size = new System.Drawing.Size(168, 23);
             this.exit.TabIndex = 3;
@@ -80,7 +82,7 @@
             // xlsLab
             // 
             this.xlsLab.AutoSize = true;
-            this.xlsLab.Location = new System.Drawing.Point(861, 157);
+            this.xlsLab.Location = new System.Drawing.Point(861, 58);
             this.xlsLab.Name = "xlsLab";
             this.xlsLab.Size = new System.Drawing.Size(70, 13);
             this.xlsLab.TabIndex = 4;
@@ -89,7 +91,7 @@
             // midLab
             // 
             this.midLab.AutoSize = true;
-            this.midLab.Location = new System.Drawing.Point(861, 126);
+            this.midLab.Location = new System.Drawing.Point(861, 35);
             this.midLab.Name = "midLab";
             this.midLab.Size = new System.Drawing.Size(70, 13);
             this.midLab.TabIndex = 5;
@@ -99,7 +101,7 @@
             // mifLab
             // 
             this.mifLab.AutoSize = true;
-            this.mifLab.Location = new System.Drawing.Point(861, 93);
+            this.mifLab.Location = new System.Drawing.Point(861, 11);
             this.mifLab.Name = "mifLab";
             this.mifLab.Size = new System.Drawing.Size(68, 13);
             this.mifLab.TabIndex = 6;
@@ -107,7 +109,7 @@
             // 
             // xlsBut
             // 
-            this.xlsBut.Location = new System.Drawing.Point(937, 152);
+            this.xlsBut.Location = new System.Drawing.Point(937, 53);
             this.xlsBut.Name = "xlsBut";
             this.xlsBut.Size = new System.Drawing.Size(44, 23);
             this.xlsBut.TabIndex = 8;
@@ -117,7 +119,7 @@
             // 
             // midBut
             // 
-            this.midBut.Location = new System.Drawing.Point(937, 121);
+            this.midBut.Location = new System.Drawing.Point(937, 30);
             this.midBut.Name = "midBut";
             this.midBut.Size = new System.Drawing.Size(44, 23);
             this.midBut.TabIndex = 9;
@@ -127,7 +129,7 @@
             // 
             // mifBut
             // 
-            this.mifBut.Location = new System.Drawing.Point(937, 88);
+            this.mifBut.Location = new System.Drawing.Point(937, 6);
             this.mifBut.Name = "mifBut";
             this.mifBut.Size = new System.Drawing.Size(44, 23);
             this.mifBut.TabIndex = 10;
@@ -137,7 +139,7 @@
             // 
             // mifPB
             // 
-            this.mifPB.Location = new System.Drawing.Point(833, 90);
+            this.mifPB.Location = new System.Drawing.Point(833, 8);
             this.mifPB.Name = "mifPB";
             this.mifPB.Size = new System.Drawing.Size(16, 16);
             this.mifPB.TabIndex = 11;
@@ -145,7 +147,7 @@
             // 
             // midPB
             // 
-            this.midPB.Location = new System.Drawing.Point(833, 124);
+            this.midPB.Location = new System.Drawing.Point(833, 33);
             this.midPB.Name = "midPB";
             this.midPB.Size = new System.Drawing.Size(16, 16);
             this.midPB.TabIndex = 12;
@@ -153,7 +155,7 @@
             // 
             // xlsPB
             // 
-            this.xlsPB.Location = new System.Drawing.Point(833, 154);
+            this.xlsPB.Location = new System.Drawing.Point(833, 55);
             this.xlsPB.Name = "xlsPB";
             this.xlsPB.Size = new System.Drawing.Size(16, 16);
             this.xlsPB.TabIndex = 13;
@@ -161,17 +163,37 @@
             // 
             // convertPB
             // 
-            this.convertPB.Location = new System.Drawing.Point(833, 188);
+            this.convertPB.Location = new System.Drawing.Point(833, 81);
             this.convertPB.Name = "convertPB";
             this.convertPB.Size = new System.Drawing.Size(16, 16);
             this.convertPB.TabIndex = 14;
             this.convertPB.TabStop = false;
+            // 
+            // pointBox
+            // 
+            this.pointBox.FormattingEnabled = true;
+            this.pointBox.Location = new System.Drawing.Point(814, 107);
+            this.pointBox.Name = "pointBox";
+            this.pointBox.Size = new System.Drawing.Size(167, 304);
+            this.pointBox.TabIndex = 15;
+            // 
+            // generateBut
+            // 
+            this.generateBut.Location = new System.Drawing.Point(814, 413);
+            this.generateBut.Name = "generateBut";
+            this.generateBut.Size = new System.Drawing.Size(166, 23);
+            this.generateBut.TabIndex = 16;
+            this.generateBut.Text = "Generate";
+            this.generateBut.UseVisualStyleBackColor = true;
+            this.generateBut.Click += new System.EventHandler(this.generateBut_Click);
             // 
             // Cartographer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 524);
+            this.Controls.Add(this.generateBut);
+            this.Controls.Add(this.pointBox);
             this.Controls.Add(this.convertPB);
             this.Controls.Add(this.xlsPB);
             this.Controls.Add(this.midPB);
@@ -212,6 +234,8 @@
         private System.Windows.Forms.PictureBox midPB;
         private System.Windows.Forms.PictureBox xlsPB;
         private System.Windows.Forms.PictureBox convertPB;
+        private System.Windows.Forms.CheckedListBox pointBox;
+        private System.Windows.Forms.Button generateBut;
 
     }
 }

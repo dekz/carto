@@ -101,6 +101,7 @@ namespace cartographer
 
         private void loadKML_Click(object sender, EventArgs e)
         {
+                      
             OpenFileDialog _fDialog = new OpenFileDialog();
             _fDialog.Title = "Select KML Data File";
             _fDialog.Filter = "KML Files|*.kml";
@@ -156,7 +157,12 @@ namespace cartographer
             Exporter m_exporter = new Exporter(m_Electorates);
             m_exporter.convertToKml();
             convertPB.Image = (Image)pic.ResourceManager.GetObject("Tick");
-            MessageBox.Show("Created KML File from XLS and MID/MIF Data");
+            MessageBox.Show("Saved KML File from XLS and MID/MIF Data");
+           // m_Electorates[0].Name;
+            for (int i =0; i < m_Electorates.Count; i++)
+                pointBox.Items.Add(m_Electorates[i].Name, CheckState.Checked);
+
+            
 
         }
 
@@ -232,6 +238,33 @@ namespace cartographer
                 xlsLab.Text = "XLS Loaded";
                 xlsPB.Image = (Image)pic.ResourceManager.GetObject("Tick");
             }
+
+        }
+
+        private void generateBut_Click(object sender, EventArgs e)
+        {
+            List<String> _checkList = new List<string>();
+            foreach (object itemChecked in pointBox.CheckedItems)
+            {
+                _checkList.Add(itemChecked.ToString());
+            }
+
+            List<Electorate> _electorates =new List<Electorate>();
+
+            for (int i = 0; i < _checkList.Count; i++)
+            {
+                if (_checkList.Contains(m_Electorates[i].Name))
+                {
+                    _electorates.Add(m_Electorates[i]);
+                }
+            }
+
+            Exporter _exporter = new Exporter(_electorates);
+            _exporter.convertToKml();
+
+
+            string _textFile = "data/kml.kml";
+            ge.OpenKmlFile(_textFile, 1);
 
         }
 

@@ -25,8 +25,10 @@ namespace cartographer
         private double m_OTHVotes;
         private double m_LNP2PVotes;
         private double m_ALP2PVotes;
+        private bool m_drawable = true;
 
         public int ID { get { return m_ID; } set { m_ID = value; } }
+        public bool Drawable { get { return m_drawable; } set { m_drawable = value; } }
         public string Name { get { return m_name; } set { m_name = value; } }
         public string Division { get { return m_division; } set { m_division = value; } }
         public string State { get { return m_state; } set { m_state = value;} }
@@ -53,6 +55,7 @@ namespace cartographer
 
         public Electorate(List<String> a_param)
         {
+            this.Drawable = true;
             this.m_division = (string)a_param[0];
             this.m_state = (string)a_param[1];
             this.m_ALPVotes = System.Convert.ToDouble(a_param[2]);

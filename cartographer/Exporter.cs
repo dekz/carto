@@ -20,7 +20,7 @@ namespace cartographer
 
             string _kml = "";
             StreamReader tr = new StreamReader("data/KmlTemplate.txt");
-            StreamWriter tw = new StreamWriter("data/kml - Copy.kml");
+            StreamWriter tw = new StreamWriter("data/kml.kml");
 
             // Write the KML template styles.
             while (!tr.EndOfStream)
@@ -44,58 +44,62 @@ namespace cartographer
             {
                 foreach (Electorate elec in m_electorates)
                 {
-                    tw.WriteLine("<Placemark>");
-                    tw.WriteLine("<name>" + elec.Name + "</name>");
-                    tw.WriteLine("<description>" +
-                        "Population: " + elec.TotalPopulation + "\n" +
-                        "Actual: " + elec.Actual + "\n" +
-                        "Projected: " + elec.Projected + "\n" +
-                        "Over 18: " + elec.Over18 + "\n" +
-                        "Area: " + elec.Area + "\n\nVotes\n" +
-                        "ALP: " + elec.ALPVotes + "\n" +
-                        "LNP: " + elec.LPVotes + "\n" +
-                        "NP: " + elec.NPVotes + "\n" +
-                        "DEM: " + elec.DEMVotes + "\n" +
-                        "GRN: " + elec.GRNVotes + "\n" +
-                        "Other: " + elec.OTHVotes + "\n" +
-                        "\nTwo Party Preferred\n" +
-                        "ALP: " + elec.ALP2PVotes + "\n" +
-                        "LNP: " + elec.LNP2PVotes + "\n" +
-                        "</description>");
-                    
-                    // Style Selection
-                    string TPWinner = "";
-                    if (elec.LNP2PVotes > elec.ALP2PVotes) 
+                    if (elec.Drawable)
                     {
-                        TPWinner = "#Labor";
-                    } else
-                    {
-                        TPWinner = "#Liberal";
-                    }
+                        tw.WriteLine("<Placemark>");
+                        tw.WriteLine("<name>" + elec.Name + "</name>");
+                        tw.WriteLine("<description>" +
+                            "Population: " + elec.TotalPopulation + "\n" +
+                            "Actual: " + elec.Actual + "\n" +
+                            "Projected: " + elec.Projected + "\n" +
+                            "Over 18: " + elec.Over18 + "\n" +
+                            "Area: " + elec.Area + "\n\nVotes\n" +
+                            "ALP: " + elec.ALPVotes + "\n" +
+                            "LNP: " + elec.LPVotes + "\n" +
+                            "NP: " + elec.NPVotes + "\n" +
+                            "DEM: " + elec.DEMVotes + "\n" +
+                            "GRN: " + elec.GRNVotes + "\n" +
+                            "Other: " + elec.OTHVotes + "\n" +
+                            "\nTwo Party Preferred\n" +
+                            "ALP: " + elec.ALP2PVotes + "\n" +
+                            "LNP: " + elec.LNP2PVotes + "\n" +
+                            "</description>");
 
-                    tw.WriteLine("<styleUrl>" + TPWinner + "</styleUrl>");
-
-                    foreach (Shape bounds in elec.Boundaries)
-                    {
-                        tw.WriteLine("<Polygon>");
-                        tw.WriteLine("<extrude>0</extrude>");
-                        tw.WriteLine("<tessellate>1</tessellate>");
-                        tw.WriteLine("<altitudeMode>clampToGround</altitudeMode>");
-                        tw.WriteLine("<outerBoundaryIs>"); 
-                        tw.WriteLine("<LinearRing>");
-                        tw.WriteLine("<coordinates>");
-
-                        foreach (Vector2 point in bounds.points)
+                        // Style Selection
+                        string TPWinner = "";
+                        if (elec.LNP2PVotes > elec.ALP2PVotes)
                         {
-                            string pts = (point.X.ToString() + "," + point.Y.ToString() + ",20");
-                            tw.WriteLine(pts);
+                            TPWinner = "#Labor";
                         }
-                        tw.WriteLine("</coordinates>");
-                        tw.WriteLine("</LinearRing>");
-                        tw.WriteLine("</outerBoundaryIs>"); 
-                        tw.WriteLine("</Polygon>");
+                        else
+                        {
+                            TPWinner = "#Liberal";
+                        }
+
+                        tw.WriteLine("<styleUrl>" + TPWinner + "</styleUrl>");
+
+                        foreach (Shape bounds in elec.Boundaries)
+                        {
+                            tw.WriteLine("<Polygon>");
+                            tw.WriteLine("<extrude>0</extrude>");
+                            tw.WriteLine("<tessellate>1</tessellate>");
+                            tw.WriteLine("<altitudeMode>clampToGround</altitudeMode>");
+                            tw.WriteLine("<outerBoundaryIs>");
+                            tw.WriteLine("<LinearRing>");
+                            tw.WriteLine("<coordinates>");
+
+                            foreach (Vector2 point in bounds.points)
+                            {
+                                string pts = (point.X.ToString() + "," + point.Y.ToString() + ",20");
+                                tw.WriteLine(pts);
+                            }
+                            tw.WriteLine("</coordinates>");
+                            tw.WriteLine("</LinearRing>");
+                            tw.WriteLine("</outerBoundaryIs>");
+                            tw.WriteLine("</Polygon>");
+                        }
+                        tw.WriteLine("</Placemark>");
                     }
-                    tw.WriteLine("</Placemark>");
                 }
                 
                 tw.WriteLine("</Document>");

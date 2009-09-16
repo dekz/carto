@@ -43,6 +43,7 @@
             this.convertPB = new System.Windows.Forms.PictureBox();
             this.pointBox = new System.Windows.Forms.CheckedListBox();
             this.generateBut = new System.Windows.Forms.Button();
+            this.loadBut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mifPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xlsPB)).BeginInit();
@@ -187,11 +188,22 @@
             this.generateBut.UseVisualStyleBackColor = true;
             this.generateBut.Click += new System.EventHandler(this.generateBut_Click);
             // 
+            // loadBut
+            // 
+            this.loadBut.Location = new System.Drawing.Point(758, 35);
+            this.loadBut.Name = "loadBut";
+            this.loadBut.Size = new System.Drawing.Size(69, 23);
+            this.loadBut.TabIndex = 17;
+            this.loadBut.Text = "Load Last";
+            this.loadBut.UseVisualStyleBackColor = true;
+            this.loadBut.Click += new System.EventHandler(this.loadBut_Click);
+            // 
             // Cartographer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 524);
+            this.Controls.Add(this.loadBut);
             this.Controls.Add(this.generateBut);
             this.Controls.Add(this.pointBox);
             this.Controls.Add(this.convertPB);
@@ -236,6 +248,7 @@
         private System.Windows.Forms.PictureBox convertPB;
         private System.Windows.Forms.CheckedListBox pointBox;
         private System.Windows.Forms.Button generateBut;
+        private System.Windows.Forms.Button loadBut;
 
     }
 }

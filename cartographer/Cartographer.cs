@@ -161,14 +161,87 @@ namespace cartographer
            // m_Electorates[0].Name;
             for (int i =0; i < m_Electorates.Count; i++)
                 pointBox.Items.Add(m_Electorates[i].Name, CheckState.Checked);
+        }
 
-            
+
+        private void loadSav()
+        {
+            Console.Out.WriteLine("Load Sav running");
+            if (File.Exists("data/last.sav"))
+            {
+                Console.Out.WriteLine("Sav file exists");
+                StreamReader tr = new StreamReader("data/last.sav");
+                if ((_mifData = tr.ReadLine()) != null)
+                {
+                    Console.Out.WriteLine("Mif not null");
+                    if (File.Exists(_mifData))
+                    {
+                        mifPB.Image = (Image)pic.ResourceManager.GetObject("Tick");
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    return;
+                }
+
+                if ((_midData = tr.ReadLine()) != null)
+                {
+                    Console.Out.WriteLine("mid not null");
+                    if (File.Exists(_midData))
+                    {
+                        midPB.Image = (Image)pic.ResourceManager.GetObject("Tick");
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+                else
+                {
+                    return;
+                }
+
+                if ((_xlsData = tr.ReadLine()) != null)
+                {
+                    Console.Out.WriteLine("Mif not null");
+                    if (File.Exists(_xlsData))
+                    {
+                        xlsPB.Image = (Image)pic.ResourceManager.GetObject("Tick");
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+
+                }
+                else
+                {
+                    return;
+                }
+                tr.Close();
+
+                convertData_Click(this, null);
+            }
 
         }
 
+
         private void exit_Click(object sender, EventArgs e)
         {
-           
+            FileStream fs = new FileStream("data/last.sav", FileMode.Create);
+            fs.Close();
+            StreamWriter tw = new StreamWriter("data/last.sav");
+            tw.WriteLine(_mifData);
+            tw.WriteLine(_midData);
+            tw.WriteLine(_xlsData);
+            tw.Close();
+
             Application.Exit();
 
         }
@@ -273,7 +346,10 @@ namespace cartographer
 
         }
 
-
+        private void loadBut_Click(object sender, EventArgs e)
+        {
+            loadSav();
+        }
 
     }
 }

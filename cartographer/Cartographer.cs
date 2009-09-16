@@ -166,7 +166,7 @@ namespace cartographer
 
         private void loadSav()
         {
-            Console.Out.WriteLine("Load Sav running");
+
             if (File.Exists("data/last.sav"))
             {
                 Console.Out.WriteLine("Sav file exists");
@@ -180,6 +180,7 @@ namespace cartographer
                     }
                     else
                     {
+                        MessageBox.Show("Error: Empty Save file");
                         return;
                     }
                 }
@@ -197,6 +198,7 @@ namespace cartographer
                     }
                     else
                     {
+                        MessageBox.Show("Error: Empty Save file");
                         return;
                     }
 
@@ -215,6 +217,7 @@ namespace cartographer
                     }
                     else
                     {
+                        MessageBox.Show("Error: Empty Save file");
                         return;
                     }
 
@@ -228,6 +231,11 @@ namespace cartographer
 
                 convertData_Click(this, null);
             }
+            else
+            {
+                MessageBox.Show("No Last save file");
+            }
+
 
         }
 

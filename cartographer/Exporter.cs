@@ -104,7 +104,7 @@ namespace cartographer
                             tw.WriteLine("<styleUrl>" + TPWinner + "</styleUrl>");
                             tw.WriteLine("<Polygon>");
                             tw.WriteLine("<extrude>0</extrude>");
-                            tw.WriteLine("<tessellate>1</tessellate>");
+                            tw.WriteLine("<tessellate>0</tessellate>");
                             tw.WriteLine("<altitudeMode>clampToGround</altitudeMode>");
                             tw.WriteLine("<outerBoundaryIs>");
                             tw.WriteLine("<LinearRing>");

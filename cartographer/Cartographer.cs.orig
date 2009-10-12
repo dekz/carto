@@ -157,7 +157,11 @@ namespace cartographer
             try { g_elecImporter.ParseMIF(_mifData); }
             catch { }
             m_Electorates = g_elecImporter.MergeData();
+<<<<<<< HEAD
             g_elecImporter.MergeDataPhaseTwo(m_Electorates, "data/Qld_Federal-State Electorate Mapping.xls", "data/Federal Election Results-Qld-2004.xls", "data/Qld_State Results by Electorate-2006.xls"); //!TESTING
+=======
+            g_elecImporter.MergeDataPhaseTwo(m_Electorates); //!TESTING
+>>>>>>> groundwork for DBMS interaction
             Exporter m_exporter = new Exporter(m_Electorates);
             m_exporter.convertToKml();
             convertPB.Image = (Image)pic.ResourceManager.GetObject("Tick");
@@ -165,9 +169,6 @@ namespace cartographer
            // m_Electorates[0].Name;
             for (int i =0; i < m_Electorates.Count; i++)
                 pointBox.Items.Add(m_Electorates[i].Name, CheckState.Checked);
-            DataGrabber dataGrabber = new DataGrabber();
-            dataGrabber.importData();
-            Console.WriteLine(dataGrabber.FederalElectorates[1].Name);
         }
 
 

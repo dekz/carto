@@ -86,6 +86,7 @@
     <Compile Include="Cartographer.Designer.cs">
       <DependentUpon>Cartographer.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataGrabber.cs" />
     <Compile Include="Dms.cs" />
     <Compile Include="Electorate.cs" />
     <Compile Include="ElectorateImporter.cs" />

@@ -16,6 +16,7 @@ namespace cartographer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Cartographer());
+            DataGrabber dataGrabber = new DataGrabber();
 
         }
     }

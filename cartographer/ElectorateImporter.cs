@@ -123,7 +123,7 @@ namespace cartographer
                 try
                 {
                     _connection.Open();
-                    string command = "UPDATE FederalElectorate SET TermsInPower=" + (2004 - int.Parse(row.ItemArray[4].ToString()))  + ", TPP = "+ row.ItemArray[2] +" WHERE ElectorateName='"+ row.ItemArray[0] +"';";
+                    string command = "UPDATE FederalElectorate SET TermsInPower=" + (2004 - int.Parse(row.ItemArray[4].ToString())) / 4 + ", TPP = "+ row.ItemArray[2] +" WHERE ElectorateName='"+ row.ItemArray[0] +"';";
                     OleDbCommand updateCommand = new OleDbCommand(command, _connection);
                     updateCommand.ExecuteNonQuery();
                 }

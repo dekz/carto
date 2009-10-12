@@ -71,7 +71,109 @@ namespace cartographer
             }
             return _Electorates;
         }
-        public List<Electorate> MergeDataPhaseTwo(List<Electorate> a_ElectorateData)
+        public void ParseStateResultsXLS(string a_filename)
+        {
+            string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + a_filename + ";Extended Properties=\"Excel 8.0;HDR=YES;\"";
+
+            OleDbConnection xlsConnection = new OleDbConnection(connectionString);
+            xlsConnection.Open();
+
+            //OleDbCommand commandtest = new OleDbCommand("SELECT * FROM [2004 Election$]", connection);
+            OleDbDataAdapter _allData = new OleDbDataAdapter("SELECT * FROM [Sheet1$]", xlsConnection);
+            DataSet ds = new DataSet();
+            _allData.Fill(ds);
+            var table = ds.Tables[0];
+            int i = 1;
+
+            OleDbConnection _connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=data/db.mdb"); //!testing
+            foreach (DataRow row in table.Rows)
+            {
+                try
+                {
+                    _connection.Open();
+                    string command = "UPDATE StateElectorate SET WinningParty='" + row.ItemArray[4] + "' WHERE ElectorateName='" + row.ItemArray[1] + "';";
+                    OleDbCommand updateCommand = new OleDbCommand(command, _connection);
+                    updateCommand.ExecuteNonQuery();
+                }
+                finally
+                {
+                    _connection.Close();
+                }
+                i++;
+
+            }
+        }
+        public void ParseFederalXLS(string a_filename)
+        {
+            string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + a_filename + ";Extended Properties=\"Excel 8.0;HDR=YES;\"";
+
+            OleDbConnection xlsConnection = new OleDbConnection(connectionString);
+            xlsConnection.Open();
+
+            //OleDbCommand commandtest = new OleDbCommand("SELECT * FROM [2004 Election$]", connection);
+            OleDbDataAdapter _allData = new OleDbDataAdapter("SELECT * FROM [2004 Election Results$]", xlsConnection);
+            DataSet ds = new DataSet();
+            _allData.Fill(ds);
+            var table = ds.Tables[0];
+            int i = 1;
+
+            OleDbConnection _connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=data/db.mdb"); //!testing
+            foreach (DataRow row in table.Rows)
+            {
+                try
+                {
+                    _connection.Open();
+                    string command = "UPDATE FederalElectorate SET TermsInPower=" + (2004 - int.Parse(row.ItemArray[4].ToString()))  + ", TPP = "+ row.ItemArray[2] +" WHERE ElectorateName='"+ row.ItemArray[0] +"';";
+                    OleDbCommand updateCommand = new OleDbCommand(command, _connection);
+                    updateCommand.ExecuteNonQuery();
+                }
+                finally
+                {
+                    _connection.Close();
+                }
+                i++;
+
+            }
+        }
+        public void ParseStateFederalRelationalXLS(string a_filename)
+        {
+            string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + a_filename + ";Extended Properties=\"Excel 8.0;HDR=YES;\"";
+
+            OleDbConnection xlsConnection = new OleDbConnection(connectionString);
+            xlsConnection.Open();
+
+            //OleDbCommand commandtest = new OleDbCommand("SELECT * FROM [2004 Election$]", connection);
+            OleDbDataAdapter _allData = new OleDbDataAdapter("SELECT * FROM [Seat Mappings$]", xlsConnection);
+            DataSet ds = new DataSet();
+            _allData.Fill(ds);
+            var table = ds.Tables[0];
+            int i = 1;
+
+            OleDbConnection _connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=data/db.mdb"); //!testing
+            _connection.Open();
+            OleDbCommand deleteCommand = new OleDbCommand("DELETE StateElectorate.* FROM StateElectorate;", _connection);
+            deleteCommand.ExecuteNonQuery();
+            _connection.Close();
+            foreach (DataRow row in table.Rows)
+            {
+                Console.Out.WriteLine(row.ItemArray.ToString());
+                try
+                {
+                    _connection.Open();
+                    string values = "'" + row.ItemArray[1] + "', '" + row.ItemArray[0] + "'";
+                    string command = "INSERT INTO [StateElectorate] (ElectorateName, FederalElectorate) VALUES (" + values + ");";
+                    OleDbCommand insertCommand = new OleDbCommand(command, _connection);
+                    insertCommand.ExecuteNonQuery();   
+                }
+                finally
+                {
+                    _connection.Close();
+                }
+                i++;
+
+            }
+        }
+        public List<Electorate> MergeDataPhaseTwo(List<Electorate> a_ElectorateData, string stateFederalRelationFilename, string federalElectionTPPHistoryFilename, string stateResultFilename)
         {
             OleDbConnection _connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=data/db.mdb"); //!testing
 
@@ -97,6 +199,9 @@ namespace cartographer
             {
                 _connection.Close();
             }
+            ParseStateFederalRelationalXLS(stateFederalRelationFilename);
+            ParseFederalXLS(federalElectionTPPHistoryFilename);
+            ParseStateResultsXLS(stateResultFilename);
             return null;
         }
         public bool ParseMID(string filename)

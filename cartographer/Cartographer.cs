@@ -157,7 +157,7 @@ namespace cartographer
             try { g_elecImporter.ParseMIF(_mifData); }
             catch { }
             m_Electorates = g_elecImporter.MergeData();
-            g_elecImporter.MergeDataPhaseTwo(m_Electorates); //!TESTING
+            g_elecImporter.MergeDataPhaseTwo(m_Electorates, "data/Qld_Federal-State Electorate Mapping.xls", "data/Federal Election Results-Qld-2004.xls", "data/Qld_State Results by Electorate-2006.xls"); //!TESTING
             Exporter m_exporter = new Exporter(m_Electorates);
             m_exporter.convertToKml();
             convertPB.Image = (Image)pic.ResourceManager.GetObject("Tick");

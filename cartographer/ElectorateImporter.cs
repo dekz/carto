@@ -71,7 +71,34 @@ namespace cartographer
             }
             return _Electorates;
         }
+        public List<Electorate> MergeDataPhaseTwo(List<Electorate> a_ElectorateData)
+        {
+            OleDbConnection _connection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=data/db.mdb"); //!testing
 
+            try
+            {
+                _connection.Open();
+                OleDbCommand deleteCommand = new OleDbCommand("DELETE FederalElectorate.* FROM FederalElectorate;", _connection);
+                deleteCommand.ExecuteNonQuery();
+                _connection.Close();
+                _connection.Open();
+                foreach (var electorate in a_ElectorateData)
+                {
+                    string columns = "ID, ElectorateName, Actual, Projected, TotalPopulation, Over18, Area, ALPVotes, LPVotes, NPVotes, DEMVotes, GRNVotes, OTHVotes, LNP2PVotes, ALP2PVotes";
+                    //string columns = "";//, TermsInPower, TPP";
+                    string values = electorate.ID + ", '" + electorate.Name + "', " + electorate.Actual + ", " + electorate.Projected + ", " + electorate.TotalPopulation + ", " + electorate.Over18 + ", " + electorate.Area + ", " + electorate.ALPVotes + ", " + electorate.LPVotes + ", " + electorate.NPVotes + ", " + electorate.DEMVotes + ", " + electorate.GRNVotes + ", " + electorate.OTHVotes + ", " + electorate.LNP2PVotes + ", " + electorate.ALP2PVotes;
+                    string command = "INSERT INTO [FederalElectorate] (" + columns + ") VALUES (" + values + ");";
+                    OleDbCommand insertCommand = new OleDbCommand(command, _connection);
+
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
+            finally
+            {
+                _connection.Close();
+            }
+            return null;
+        }
         public bool ParseMID(string filename)
         {
             try

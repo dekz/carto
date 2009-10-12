@@ -157,6 +157,7 @@ namespace cartographer
             try { g_elecImporter.ParseMIF(_mifData); }
             catch { }
             m_Electorates = g_elecImporter.MergeData();
+            g_elecImporter.MergeDataPhaseTwo(m_Electorates); //!TESTING
             Exporter m_exporter = new Exporter(m_Electorates);
             m_exporter.convertToKml();
             convertPB.Image = (Image)pic.ResourceManager.GetObject("Tick");

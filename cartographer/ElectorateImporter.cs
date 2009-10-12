@@ -156,7 +156,6 @@ namespace cartographer
             _connection.Close();
             foreach (DataRow row in table.Rows)
             {
-                Console.Out.WriteLine(row.ItemArray.ToString());
                 try
                 {
                     _connection.Open();

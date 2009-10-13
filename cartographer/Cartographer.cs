@@ -121,6 +121,7 @@ namespace cartographer
             }
 
             ge.OpenKmlFile(_textFile, 1);
+            //ge.
 
         }
 
@@ -391,6 +392,62 @@ namespace cartographer
                 colourMode = "Safety";
             }
 
+        }
+
+        //north
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CameraInfoGEClass cam = new CameraInfoGEClass();
+            cam.FocusPointLatitude = -15.5f;
+            cam.FocusPointLongitude = 143.3f;
+            cam.FocusPointAltitude = 600000.0f;
+            ge.SetCamera(cam, 1.0f);
+        }
+        //west
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CameraInfoGEClass cam = new CameraInfoGEClass();
+            cam.FocusPointLatitude = -23.3f;
+            cam.FocusPointLongitude = 143.3f;
+            cam.FocusPointAltitude = 700000.0f;
+            ge.SetCamera(cam, 1.0f);
+        }
+        //southeast
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CameraInfoGEClass cam = new CameraInfoGEClass();
+            cam.FocusPointLatitude = -27.23;
+            cam.FocusPointLongitude = 152.3f;
+            cam.FocusPointAltitude = 291000.0f;
+            ge.SetCamera(cam, 1.0f);
+        }
+
+        //sunshine
+        private void button4_Click(object sender, EventArgs e)
+        {
+            CameraInfoGEClass cam = new CameraInfoGEClass();
+            cam.FocusPointLatitude = -26.55;
+            cam.FocusPointLongitude = 153f;
+            cam.FocusPointAltitude = 80000.0f;
+            ge.SetCamera(cam, 1.0f);
+        }
+        //gold
+        private void button5_Click(object sender, EventArgs e)
+        {
+            CameraInfoGEClass cam = new CameraInfoGEClass();
+            cam.FocusPointLatitude = -28.0f;
+            cam.FocusPointLongitude = 153.4f;
+            cam.FocusPointAltitude = 41000.0f;
+            ge.SetCamera(cam, 1.0f);
+        }
+        //bris
+        private void button6_Click(object sender, EventArgs e)
+        {
+            CameraInfoGEClass cam = new CameraInfoGEClass();
+            cam.FocusPointLatitude = -27.5;
+            cam.FocusPointLongitude = 153;
+            cam.FocusPointAltitude = 60000.0f;
+            ge.SetCamera(cam, 1.0f);
         }
 
     }

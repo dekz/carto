@@ -17,6 +17,10 @@ namespace cartographer
     {
         public EARTHLib.ApplicationGE ge = null; //new ApplicationGEClass();
         public List<Electorate> m_Electorates;
+        public DataGrabber g_Grabber;
+        private string colourMode = "Party";
+        public string ColourMode { get; set; }
+
         private string _midData;
         private string _mifData;
         private string _xlsData;
@@ -158,16 +162,19 @@ namespace cartographer
             catch { }
             m_Electorates = g_elecImporter.MergeData();
             g_elecImporter.MergeDataPhaseTwo(m_Electorates, "data/Qld_Federal-State Electorate Mapping.xls", "data/Federal Election Results-Qld-2004.xls", "data/Qld_State Results by Electorate-2006.xls"); //!TESTING
-            Exporter m_exporter = new Exporter(m_Electorates);
-            m_exporter.convertToKml();
             convertPB.Image = (Image)pic.ResourceManager.GetObject("Tick");
-            MessageBox.Show("Saved KML File from XLS and MID/MIF Data");
+
            // m_Electorates[0].Name;
             for (int i =0; i < m_Electorates.Count; i++)
                 pointBox.Items.Add(m_Electorates[i].Name, CheckState.Checked);
-            DataGrabber dataGrabber = new DataGrabber();
-            dataGrabber.importData();
-            Console.WriteLine(dataGrabber.FederalElectorates[1].Name);
+            g_Grabber = new DataGrabber();
+            g_Grabber.importData();
+
+
+            Exporter m_exporter = new Exporter(m_Electorates);
+            m_exporter.convertToKml(colourMode);
+            MessageBox.Show("Saved KML File from XLS and MID/MIF Data");
+
         }
 
 
@@ -344,11 +351,16 @@ namespace cartographer
                 if (_checkList.Contains(m_Electorates[i].Name))
                 {
                     _electorates.Add(m_Electorates[i]);
+                    FederalElectorate fed = g_Grabber.FederalElectorates.Find(delegate(FederalElectorate f) { return f.Name == m_Electorates[i].Name; });
+                    m_Electorates[i].SeatSafety = fed.SeatSafety;
+                    m_Electorates[i].WinningParty = fed.WinningParty;
+
+                    // SomeObject desiredObject = myObjects.Find(delegate(SomeObject o) { return o.Id == desiredId; });
                 }
             }
 
             Exporter _exporter = new Exporter(_electorates);
-            _exporter.convertToKml();
+            _exporter.convertToKml(colourMode);
             string _textFile = "";
             if (File.Exists("data/kml.kml"))
             {
@@ -364,6 +376,21 @@ namespace cartographer
         private void loadBut_Click(object sender, EventArgs e)
         {
             loadSav();
+        }
+
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                radioButton2.Checked = false;
+                colourMode = "Party";
+            }
+            else if (radioButton2.Checked)
+            {
+                radioButton1.Checked = false;
+                colourMode = "Safety";
+            }
+
         }
 
     }

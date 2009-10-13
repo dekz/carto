@@ -1,7 +1,7 @@
 ﻿﻿<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.0">
   <Document>
-<Style id="Labor">
+<Style id="Liberal">
 <LabelStyle>
 <color>ffbbbbff</color>
 <scale>1.5</scale>
@@ -14,7 +14,7 @@
 <color>a8ff7566</color>
 </PolyStyle>
 </Style>
-<Style id="Liberal">
+<Style id="Labor">
 <LabelStyle>
         <color>7fffaaff</color>
         <scale>1.5</scale>
@@ -30,4 +30,101 @@
 <outline>1</outline>
       </PolyStyle>
     </Style>
- 
+<Style id="Green">
+<LabelStyle>
+        <color></color>
+        <scale>1.5</scale>
+</LabelStyle>
+        <LineStyle>
+            <color>ff224a1f</color>
+            <width>4</width>
+        </LineStyle>
+      <PolyStyle>
+        <color>ff377732</color>
+<colorMode>normal</colorMode>
+<fill>1</fill>
+<outline>1</outline>
+      </PolyStyle>
+    </Style>
+	
+<Style id="Marginal">
+<LabelStyle>
+        <color></color>
+        <scale>1.5</scale>
+</LabelStyle>
+        <LineStyle>
+            <color>eb8c87ff</color>
+            <width>4</width>
+        </LineStyle>
+      <PolyStyle>
+        <color>a94b46ff</color>
+<colorMode>normal</colorMode>
+<fill>1</fill>
+<outline>1</outline>
+      </PolyStyle>
+    </Style>
+	
+<Style id="Moderate">
+<LabelStyle>
+        <color></color>
+        <scale>1.5</scale>
+</LabelStyle>
+        <LineStyle>
+            <color>ffeaeb87</color>
+            <width>4</width>
+        </LineStyle>
+      <PolyStyle>
+        <color>ffcfd125</color>
+<colorMode>normal</colorMode>
+<fill>1</fill>
+<outline>1</outline>
+      </PolyStyle>
+    </Style>
+<Style id="Safe">
+<LabelStyle>
+        <color></color>
+        <scale>1.5</scale>
+</LabelStyle>
+        <LineStyle>
+            <color>ff6edc6e</color>
+            <width>4</width>
+        </LineStyle>
+      <PolyStyle>
+        <color>ff25d125</color>
+<colorMode>normal</colorMode>
+<fill>1</fill>
+<outline>1</outline>
+      </PolyStyle>
+    </Style>
+<Style id="VSafe">
+<LabelStyle>
+        <color></color>
+        <scale>1.5</scale>
+</LabelStyle>
+        <LineStyle>
+            <color>ff3f773f</color>
+            <width>4</width>
+        </LineStyle>
+      <PolyStyle>
+        <color>ff155915</color>
+<colorMode>normal</colorMode>
+<fill>1</fill>
+<outline>1</outline>
+      </PolyStyle>
+    </Style>
+<Style id="Rock">
+<LabelStyle>
+        <color></color>
+        <scale>1.5</scale>
+</LabelStyle>
+        <LineStyle>
+            <color>ff484479</color>
+            <width>4</width>
+        </LineStyle>
+      <PolyStyle>
+        <color>ff140e58</color>
+<colorMode>normal</colorMode>
+<fill>1</fill>
+<outline>1</outline>
+      </PolyStyle>
+    </Style>

@@ -9,15 +9,15 @@ namespace cartographer
     class Exporter
     {
         private List<Electorate> m_electorates;
-
+        private string colourMode;
         public Exporter(List<Electorate> a_electorates)
         {
             m_electorates = a_electorates;
         }
 
-        public string convertToKml()
+        public string convertToKml(string mode)
         {
-
+            colourMode = mode;
             string _kml = "";
             StreamReader tr = new StreamReader("data/KmlTemplate.txt");
             FileStream fs = new FileStream("data/kml.kml", FileMode.Create);
@@ -36,7 +36,7 @@ namespace cartographer
 
         public bool exportKMLFile()
         {
-            string _returnKML = convertToKml();
+            string _returnKML = convertToKml(colourMode);
             return true;
         }
 
@@ -48,33 +48,13 @@ namespace cartographer
                 {
                     if (elec.Drawable)
                     {
-/*                        tw.WriteLine("<Placemark>");
-                        tw.WriteLine("<name>" + elec.Name + "</name>");
-                        tw.WriteLine("<description>" +
-                            "Population: " + elec.TotalPopulation + "\n" +
-                            "Actual: " + elec.Actual + "\n" +
-                            "Projected: " + elec.Projected + "\n" +
-                            "Over 18: " + elec.Over18 + "\n" +
-                            "Area: " + elec.Area + "\n\nVotes\n" +
-                            "ALP: " + elec.ALPVotes + "\n" +
-                            "LNP: " + elec.LPVotes + "\n" +
-                            "NP: " + elec.NPVotes + "\n" +
-                            "DEM: " + elec.DEMVotes + "\n" +
-                            "GRN: " + elec.GRNVotes + "\n" +
-                            "Other: " + elec.OTHVotes + "\n" +
-                            "\nTwo Party Preferred\n" +
-                            "ALP: " + elec.ALP2PVotes + "\n" +
-                            "LNP: " + elec.LNP2PVotes + "\n" +
-                            "</description>");*/
-
-                        // Style Selection
-                       
-
                         foreach (Shape bounds in elec.Boundaries)
                         {
                             tw.WriteLine("<Placemark>");
                             tw.WriteLine("<name>" + elec.Name + "</name>");
                             tw.WriteLine("<description>" +
+                                "Current Party: " + elec.WinningParty + "\n" +
+                                "Seat Safety: " + elec.SeatSafety + "\n\n" +
                                 "Population: " + elec.TotalPopulation + "\n" +
                                 "Actual: " + elec.Actual + "\n" +
                                 "Projected: " + elec.Projected + "\n" +
@@ -90,18 +70,48 @@ namespace cartographer
                                 "ALP: " + elec.ALP2PVotes + "\n" +
                                 "LNP: " + elec.LNP2PVotes + "\n" +
                                 "</description>");
-                           
-                            string TPWinner = "";
-                            if (elec.LNP2PVotes > elec.ALP2PVotes)
+
+                            string style = "";
+                            if (colourMode == "Party")
                             {
-                                TPWinner = "#Labor";
+                                if (elec.WinningParty == "ALP")
+                                {
+                                    style = "#Labor";
+                                }
+                                else if ( elec.WinningParty == "LIB")
+                                {
+                                    style = "#Liberal";
+                                }
+                                else if ( elec.WinningParty == "GRN")
+                                {
+                                    style = "#Green";
+                                }
                             }
-                            else
+                            else if (colourMode == "Safety")
                             {
-                                TPWinner = "#Liberal";
+                                switch (elec.SeatSafety)
+                                {
+                                    case "Marginal Seat":
+                                        style = "#Marginal";
+                                        break;
+                                    case "Moderately Safe":
+                                        style = "#Moderate";
+                                        break;
+                                    case "Safe":
+                                        style = "#Safe";
+                                        break;
+                                    case "Very Safe":
+                                        style = "#VSafe";
+                                        break;
+                                    case "Rock Solid":
+                                        style = "#Rock";
+                                        break;
+                                    default:
+                                        break;
+                                }
                             }
 
-                            tw.WriteLine("<styleUrl>" + TPWinner + "</styleUrl>");
+                            tw.WriteLine("<styleUrl>" + style + "</styleUrl>");
                             tw.WriteLine("<Polygon>");
                             tw.WriteLine("<extrude>0</extrude>");
                             tw.WriteLine("<tessellate>0</tessellate>");
@@ -121,10 +131,10 @@ namespace cartographer
                             tw.WriteLine("</Polygon>");
                             tw.WriteLine("</Placemark>");
                         }
-                       // tw.WriteLine("</Placemark>");
+                        // tw.WriteLine("</Placemark>");
                     }
                 }
-                
+
                 tw.WriteLine("</Document>");
                 tw.WriteLine("</kml>");
                 Console.Out.WriteLine("Done");

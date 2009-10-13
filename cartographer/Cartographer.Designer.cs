@@ -44,6 +44,9 @@
             this.pointBox = new System.Windows.Forms.CheckedListBox();
             this.generateBut = new System.Windows.Forms.Button();
             this.loadBut = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.mifPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.midPB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xlsPB)).BeginInit();
@@ -175,7 +178,7 @@
             this.pointBox.FormattingEnabled = true;
             this.pointBox.Location = new System.Drawing.Point(814, 107);
             this.pointBox.Name = "pointBox";
-            this.pointBox.Size = new System.Drawing.Size(167, 304);
+            this.pointBox.Size = new System.Drawing.Size(167, 244);
             this.pointBox.TabIndex = 15;
             // 
             // generateBut
@@ -198,11 +201,48 @@
             this.loadBut.UseVisualStyleBackColor = true;
             this.loadBut.Click += new System.EventHandler(this.loadBut_Click);
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(814, 387);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(86, 17);
+            this.radioButton1.TabIndex = 18;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Current Party";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(905, 387);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(80, 17);
+            this.radioButton2.TabIndex = 19;
+            this.radioButton2.Text = "Seat Safety";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(811, 367);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Colour Mode";
+            // 
             // Cartographer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 524);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.loadBut);
             this.Controls.Add(this.generateBut);
             this.Controls.Add(this.pointBox);
@@ -249,6 +289,9 @@
         private System.Windows.Forms.CheckedListBox pointBox;
         private System.Windows.Forms.Button generateBut;
         private System.Windows.Forms.Button loadBut;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Label label1;
 
     }
 }

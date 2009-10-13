@@ -47,6 +47,9 @@ namespace cartographer
         public double LNP2PVotes { get { return m_LNP2PVotes; } set { m_LNP2PVotes = value; } }
         public double ALP2PVotes { get { return m_ALP2PVotes; } set { m_ALP2PVotes = value; } }
 
+        public string WinningParty { get; set; }
+        public string SeatSafety { get; set; }
+
 
         public Electorate()
         {
